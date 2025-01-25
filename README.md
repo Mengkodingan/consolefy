@@ -64,7 +64,7 @@ const consolefy = new Consolefy();
 
 // Set a custom prefix and theme for the 'info' log level
 consolefy.setPrefix("info", "INFORMATION");
-consolefy.setTheme("info", (text) => Colors.bgMagenta(Colors.black(` ${text} `)));
+consolefy.setTheme("info", (text) => Colors.bgMagenta(Colors.black(text)));
 
 consolefy.info("This is an informational message with a custom prefix and theme.");
 ```
