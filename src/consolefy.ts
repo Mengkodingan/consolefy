@@ -58,7 +58,7 @@ class Consolefy {
 
   private formatMessage(type: keyof NonNullable<typeof this.config.prefixes>, message: string): string {
     let str = this.config.format
-        ?.replace(/{prefix}/g, (this.config.theme as any)?.[type]?.(` ${this.config.prefixes?.[type]} `) as string)
+        ?.replace(/{prefix}/g, (this.config.theme?.[type]?.(` ${this.config.prefixes?.[type] ?? ''} `) ?? type as any))
         ?.replace(/{tag}/g, this.config.tag ? ` ${gray(`[${this.config.tag}]`)}` : "")
         ?.replace(/{message}/g, message) || `${message}`;
 

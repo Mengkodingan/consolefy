@@ -2,6 +2,7 @@ import { Colors, Consolefy } from '../lib';
 
 const consolefy = new Consolefy();
 
+consolefy.log("Just a regular log.");
 consolefy.warn("This action cannot be undone.");
 consolefy.success("Operation completed successfully.");
 consolefy.error("An error occurred while processing your request.");
@@ -13,6 +14,7 @@ consolefy.defineLogLevel("verbose", {
 });
 
 consolefy.log("verbose", "This is a verbose message.");
+consolefy.log("success", "This is a success message from log method.");
 
 consolefy.group("Testing");
 consolefy.info("Starting a new test.");
