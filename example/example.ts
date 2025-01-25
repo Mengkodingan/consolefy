@@ -15,8 +15,20 @@ consolefy.defineLogLevel("verbose", {
 consolefy.log("verbose", "This is a verbose message.");
 
 consolefy.group("Testing");
-consolefy.info("This is a test message.");
-consolefy.warn("This is a test warning.");
+consolefy.info("Starting a new test.");
+consolefy.warn("Has one warning.");
+consolefy.success("Test Success.");
 consolefy.groupEnd();
 
-consolefy.success("Test Success")
+consolefy.setTag("performance");
+consolefy.info("Info message with tag");
+
+consolefy.setFormat("{tag} {prefix} {message}");
+consolefy.warn("Tag first before prefix because custom format.");
+
+consolefy.resetFormat()
+consolefy.warn("The format has been reset.");
+
+consolefy.resetTag();
+consolefy.info("Info message without tag because it has been reset.");
+

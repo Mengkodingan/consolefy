@@ -10,6 +10,7 @@ type Config = {
   };
   format?: string;
   silent?: boolean;
+  tag?: string;
   theme?: {
     warn?: (text: string) => string;
     success?: (text: string) => string;
@@ -33,8 +34,9 @@ class Consolefy {
         info: "INFO",
         ...initialConfig.prefixes,
       },
-      format: initialConfig.format || "{prefix} {message}",
+      format: initialConfig.format || "{prefix}{tag} {message}",
       silent: initialConfig.silent || false,
+      tag: initialConfig.tag || undefined,
       theme: {
         warn: (text) => bgYellow(black(text)),
         success: (text) => bgGreen(black(text)),
@@ -55,9 +57,12 @@ class Consolefy {
   }
 
   private formatMessage(type: keyof NonNullable<typeof this.config.prefixes>, message: string): string {
-    return this.config.format
+    let str = this.config.format
         ?.replace(/{prefix}/g, (this.config.theme as any)?.[type]?.(` ${this.config.prefixes?.[type]} `) as string)
+        ?.replace(/{tag}/g, this.config.tag ? ` ${gray(`[${this.config.tag}]`)}` : "")
         ?.replace(/{message}/g, message) || `${message}`;
+
+    return str.replace(/^\s+|\s+$/gm,'');
   }
 
   setPrefix(type: keyof NonNullable<typeof this.config.prefixes>, prefix: string): void {
@@ -70,6 +75,18 @@ class Consolefy {
 
   setFormat(format: string): void {
     this.config.format = format;
+  }
+
+  resetFormat(): void {
+    this.config.format = "{prefix}{tag} {message}";
+  }
+
+  setTag(tag: string): void {
+    this.config.tag = tag;
+  }
+
+  resetTag(): void {
+    this.config.tag = "";
   }
 
   silent(state: boolean): void {
