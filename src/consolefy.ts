@@ -1,4 +1,4 @@
-import { bgBlue, bgGreen, bgRed, bgYellow, black, white } from "colorette";
+import { bgBlue, bgGreen, bgRed, bgYellow, black, gray, white } from "colorette";
 
 type Config = {
   prefixes?: {
@@ -86,12 +86,12 @@ class Consolefy {
   group(name: string): void {
     this.isGrouping = true;
     this.groupName = name;
-    console.log(`\n┌ ${bgBlue(black(` GROUP: ${name} `))}\n│`);
+    console.log(`\n${gray('┌')} ${bgBlue(black(` GROUP: ${name} `))}\n${gray('│')}`);
   }
 
   groupEnd(): void {
     this.isGrouping = false;
-    console.log(`└ ${bgBlue(black(` END GROUP: ${this.groupName} `))}`);
+    console.log(`${gray('└')} ${bgBlue(black(` END GROUP: ${this.groupName} `))}`);
     this.groupName = "";
   }
 
@@ -99,7 +99,7 @@ class Consolefy {
     if(this.config.silent) return;
     
     if (this.isGrouping) {
-      console.log(`│ ${this.formatMessage(level, messages.join(" "))}\n│`);
+      console.log(`${gray('│')} ${this.formatMessage(level, messages.join(" "))}\n${gray('│')}`);
       return;
     }
 
