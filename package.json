@@ -1,0 +1,26 @@
+{
+  "name": "@mengkodingan/consolefy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "example": "pnpm build && tsc example/example.ts && node example/example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mengkodingan/consolefy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mengkodingan/consolefy/issues"
+  },
+  "keywords": ["console", "color", "cli", "log", "debug"],
+  "author": "JstnLT <jastinlinggar@gmail.com> (jstnlt.my.id).",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "colorette": "^2.0.20"
+  }
+}
