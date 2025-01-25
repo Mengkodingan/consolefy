@@ -28,15 +28,16 @@ class Consolefy {
         success: "SUCCESS",
         error: "ERROR",
         info: "INFO",
+        ...initialConfig.prefixes,
       },
-      format: "{prefix} {message}",
+      format: initialConfig.format || "{prefix} {message}",
       theme: {
         warn: (text) => bgYellow(black(text)),
         success: (text) => bgGreen(black(text)),
         error: (text) => bgRed(black(text)),
         info: (text) => bgBlue(black(text)),
+        ...initialConfig.theme,
       },
-      ...initialConfig,
     };
   }
 
@@ -49,26 +50,38 @@ class Consolefy {
     };
   }
 
-private formatMessage(type: keyof NonNullable<typeof this.config.prefixes>, message: string): string {
+  private formatMessage(type: keyof NonNullable<typeof this.config.prefixes>, message: string): string {
     return this.config.format
         ?.replace(/{prefix}/g, (this.config.theme as any)?.[type]?.(` ${this.config.prefixes?.[type]} `) as string)
         ?.replace(/{message}/g, message) || `${message}`;
-}
+  }
+
+  setPrefix(type: keyof NonNullable<typeof this.config.prefixes>, prefix: string): void {
+    this.config.prefixes = { ...this.config.prefixes, [type]: prefix };
+  }
+
+  setTheme(type: keyof NonNullable<typeof this.config.theme>, theme: (text: string) => string): void {
+    this.config.theme = { ...this.config.theme, [type]: theme };
+  }
+
+  setFormat(format: string): void {
+    this.config.format = format;
+  }
 
   warn(...messages: any[]): void {
-    console.log(`\n${this.formatMessage('warn', messages.join(" "))}`);
+    console.log(`\n${this.formatMessage("warn", messages.join(" "))}`);
   }
 
   success(...messages: any[]): void {
-    console.log(`\n${this.formatMessage('success', messages.join(" "))}`);
+    console.log(`\n${this.formatMessage("success", messages.join(" "))}`);
   }
 
   error(...messages: any[]): void {
-    console.log(`\n${this.formatMessage('error', messages.join(" "))}`);
+    console.log(`\n${this.formatMessage("error", messages.join(" "))}`);
   }
 
   info(...messages: any[]): void {
-    console.log(`\n${this.formatMessage('info', messages.join(" "))}`);
+    console.log(`\n${this.formatMessage("info", messages.join(" "))}`);
   }
 }
 
