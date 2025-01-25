@@ -1,0 +1,9 @@
+/example
+/node_modules
+/src
+.gitignore
+.github
+changes.md
+package-lock.json
+pnpm-lock.json
+tsconfig.json
