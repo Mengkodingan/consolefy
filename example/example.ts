@@ -34,3 +34,7 @@ consolefy.warn("The format has been reset.");
 consolefy.resetTag();
 consolefy.info("Info message without tag because it has been reset.");
 
+consolefy.setPrefix("info", "INFORMATION");
+consolefy.setTheme("info", (text) => Colors.bgMagenta(Colors.black(` ${text} `)));
+
+consolefy.info("This is an informational message with a custom prefix and theme.");

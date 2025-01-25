@@ -1,7 +1,7 @@
 {
   "name": "@mengkodingan/consolefy",
   "version": "1.0.0",
-  "description": "",
+  "description": "a customizable logging library.",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
