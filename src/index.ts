@@ -9,6 +9,7 @@ type Config = {
     [key: string]: string | undefined;
   };
   format?: string;
+  silent?: boolean;
   theme?: {
     warn?: (text: string) => string;
     success?: (text: string) => string;
@@ -31,6 +32,7 @@ class Consolefy {
         ...initialConfig.prefixes,
       },
       format: initialConfig.format || "{prefix} {message}",
+      silent: initialConfig.silent || false,
       theme: {
         warn: (text) => bgYellow(black(text)),
         success: (text) => bgGreen(black(text)),
@@ -68,19 +70,27 @@ class Consolefy {
     this.config.format = format;
   }
 
+  silent(state: boolean): void {
+    this.config.silent = state;
+  }
+
   warn(...messages: any[]): void {
+    if(this.config.silent) return;
     console.log(`\n${this.formatMessage("warn", messages.join(" "))}`);
   }
 
   success(...messages: any[]): void {
+    if(this.config.silent) return;
     console.log(`\n${this.formatMessage("success", messages.join(" "))}`);
   }
 
   error(...messages: any[]): void {
+    if(this.config.silent) return;
     console.log(`\n${this.formatMessage("error", messages.join(" "))}`);
   }
 
   info(...messages: any[]): void {
+    if(this.config.silent) return;
     console.log(`\n${this.formatMessage("info", messages.join(" "))}`);
   }
 }
