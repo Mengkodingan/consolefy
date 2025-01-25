@@ -13,3 +13,10 @@ consolefy.defineLogLevel("verbose", {
 });
 
 consolefy.log("verbose", "This is a verbose message.");
+
+consolefy.group("Testing");
+consolefy.info("This is a test message.");
+consolefy.warn("This is a test warning.");
+consolefy.groupEnd();
+
+consolefy.success("Test Success")
